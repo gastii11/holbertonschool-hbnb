@@ -1,24 +1,21 @@
-```mermeid
+```mermaid
 classDiagram
 class Presentation {
     <<layer>>
-    +Service
+    +Services
     +API
 }
-
 class Business {
     <<layer>>
     +User
     +Place
     +Review
-    +Amenty
+    +Amenity
 }
-
 class Persistence {
     <<layer>>
     +DataAccess
 }
-
 Presentation --> Business : Facade
 Business --> Persistence : Data Access
 ```
