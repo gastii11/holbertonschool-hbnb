@@ -27,7 +27,7 @@ classDiagram
 
     class BaseModel {
     <<super class>>
-    +UUID uuid
+    +UUID
     +Date creation_date
     +Date last_update
     }
