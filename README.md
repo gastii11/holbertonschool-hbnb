@@ -85,8 +85,8 @@ classDiagram
     Review --|> BaseModel : Inheritance
 
     Place o-- User : Composition
-    Place o-- Amenity : Composition
     Place o-- Review : Composition
 
+    Place o-- Amenity : Association
     User --> Review : Association
 ```
