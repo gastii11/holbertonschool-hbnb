@@ -90,3 +90,32 @@ classDiagram
     Place <-- Amenity : Association
     User --> Review : Association
 ```
+
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant BusinessLogic
+    participant Database
+
+    User ->> API : Register User (API Call)
+    API -->> API : Wrong Data
+    API -->> User : Wrong Data Error Message
+
+    API ->> BusinessLogic : Validate and Process Request
+    BusinessLogic -->> BusinessLogic : Validation Failed
+    BusinessLogic -->> API : Return Error
+    API -->> User : Registration Failed Message
+
+    BusinessLogic ->> Database : Check User Existense
+    Database -->> Database : User Already Exist
+    Database -->> BusinessLogic : Return Error
+    BusinessLogic -->> API : Return Error
+    API -->> User : Registration Failed Message
+
+    BusinessLogic ->> Database : Create User
+    Database -->> BusinessLogic : Return Success
+    BusinessLogic -->> API : Return Success
+    API -->> User : Registration Successfully Message
+```
