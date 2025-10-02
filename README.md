@@ -87,6 +87,6 @@ classDiagram
     Place o-- User : Composition
     Place o-- Review : Composition
 
-    Place o-- Amenity : Association
+    Place o--> Amenity : Association
     User --> Review : Association
 ```
