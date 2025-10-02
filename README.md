@@ -49,9 +49,9 @@ classDiagram
     +User owner
     +String title
     +String description
-    +Number price
-    +Number latitude
-    +Number longitude
+    +Int price
+    +Int latitude
+    +Int longitude
     +List (Amenity) amenities
     +create()
     +update()
@@ -72,7 +72,7 @@ classDiagram
     class Review {
     <<model>>
     +String comment
-    +Number rating
+    +Int rating
     +create()
     +update()
     +delete()
