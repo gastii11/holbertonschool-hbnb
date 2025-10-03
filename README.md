@@ -104,63 +104,63 @@ Review: Stores comments and ratings about places.
 All classes inherit from BaseModel, ensuring consistency in identification and date handling.
 
 ## Class Documentation
-### <u>Class BaseModel</u>
+### Class BaseModel
 
-Type: Superclass
+**Type:** Superclass
 
-Purpose: Provides basic attributes common to all system entities.
+**Purpose:** Provides basic attributes common to all system entities.
 
-Attributes:
+**Attributes:**
 
-uuid: Universal unique identifier.
+**uuid:** Universal unique identifier.
 
-creation_date: Creation date.
+**creation_date:** Creation date.
 
-last_update: Last modification date.
+**last_update:** Last modification date.
 
 ### Class User
 
-Type: Model
+**Type:** Model
 
-Purpose: Represents the users registered in the system.
+**Purpose:** Represents the users registered in the system.
 
-Attributes:
+**Attributes:**
 
-first_name: User’s first name.
+**first_name:** User’s first name.
 
-last_name: User’s last name.
+**last_name:** User’s last name.
 
-email: User’s email address.
+**email:** User’s email address.
 
-password: Encrypted password.
+**password:** Encrypted password.
 
-is_admin: Indicates whether the user has admin privileges.
+**is_admin:** Indicates whether the user has admin privileges.
 
-Methods:
+**Methods:**
 
-register(): Creates a new user.
+**register():** Creates a new user.
 
-update(): Updates user information.
+**update():** Updates user information.
 
-delete(): Deletes a user.
+**delete():** Deletes a user.
 
 ### Class Place
 
-Type: Model
+**Type:** Model
 
-Purpose: Represents a place available for hosting or rental.
+**Purpose:** Represents a place available for hosting or rental.
 
-Attributes:
+**Attributes:**
 
-owner: The user who owns the place.
+**owner:** The user who owns the place.
 
-title: Place title or name.
+**title:** Place title or name.
 
-description: Place description.
+**description:** Place description.
 
-price: Price per stay.
+**price:** Price per stay.
 
-latitude: Latitude coordinate.
+**latitude:** Latitude coordinate.
 
 longitude: Longitude coordinate.
 
