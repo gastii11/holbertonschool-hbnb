@@ -89,19 +89,13 @@ The system is based on an HBnB-style model, where users can register places, man
 
 ## General Description
 
-The diagram consists of five main classes:
+The class diagram represents the main entities of the application and their relationships. It consists of five key classes: BaseModel, User, Place, Amenity, and Review.
 
-BaseModel: A base class that provides common attributes for identity and time tracking.
+The BaseModel class acts as a superclass that provides common attributes, such as a unique identifier and timestamps, ensuring consistency across all entities. The User class represents the individuals registered in the system, while the Place class models the properties that users can list or rent. The Amenity class describes additional services or features that a place can offer, such as Wi-Fi or parking. Finally, the Review class allows users to provide feedback through comments and ratings on listed places.
 
-User: Represents the system’s users.
+All classes inherit from BaseModel, ensuring that they share a unified structure for identification and time management. The relationships between classes are also clearly defined: a Place is linked to a single User as its owner, may contain multiple Amenities, and can receive multiple Reviews. Additionally, users are directly associated with the reviews they create.
 
-Place: Defines available places.
-
-Amenity: Describes additional services or features for places.
-
-Review: Stores comments and ratings about places.
-
-All classes inherit from BaseModel, ensuring consistency in identification and date handling.
+This structure establishes a solid foundation for representing the application’s domain and provides a clear blueprint for implementation in code.
 
 ## Class Documentation
 ### Class BaseModel
