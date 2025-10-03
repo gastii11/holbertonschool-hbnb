@@ -8,7 +8,7 @@ HBnB allows the management of data such as users, places to stay, reviews, and m
 
 The idea is that this guide serves as support both for those working directly on the project and for those who need to understand or maintain it in the future.
 
-<img width="682" height="1562" alt="Diagrama sin fondo drawio" src="https://github.com/user-attachments/assets/4d33cbbb-0be3-42f5-96b3-f68767ae1f22" />
+<img width="681" height="1561" alt="Diagrama sin fondo y flechas negras drawio" src="https://github.com/user-attachments/assets/6c21753e-840e-43e3-9719-212b4137bdad" />
 
 # Detailed Class Diagram for Business Logic Layer
 
