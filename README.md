@@ -79,7 +79,9 @@ classDiagram
     Place <-- Amenity : Association
     User --> Review : Association
 ```
+# Sequence Diagrams for API Calls
 
+## User Registration sequence
 
 ```mermaid
 sequenceDiagram
@@ -108,6 +110,7 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Registration Successfully Message (code 201)
 ```
+## Place Creation sequence
 
 ```mermaid
 sequenceDiagram
