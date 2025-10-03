@@ -218,6 +218,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 ## Relationships Between Classes
 
 **Inheritance:**
+
 All classes (User, Place, Amenity, Review) inherit from BaseModel, sharing identity and time-related attributes.
 
 **Composition:**
