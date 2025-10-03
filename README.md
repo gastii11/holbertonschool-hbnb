@@ -108,3 +108,31 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Registration Successfully Message (code 201)
 ```
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant API
+  participant BusinessLogic
+  participant DataBase
+  
+    User ->> API : Place Creation (API Call)
+    API -->> API : Wrong Data
+    API -->> User : Wrong Data Error Message (code 400)
+
+    API ->> BusinessLogic : Validate and Process Request
+    BusinessLogic -->> BusinessLogic : Validation Failed
+    BusinessLogic -->> API : Return Error
+    API -->> User : Place Creation Failed Error Message (code 401)
+
+    BusinessLogic ->> DataBase : Check Place Existense
+    DataBase -->> DataBase : Place Already Exist
+    DataBase -->> BusinessLogic: Return Error
+    BusinessLogic -->> API : Return Error
+    API -->> User : Place Creation Failed Error Message (code 401)
+
+    BusinessLogic ->> DataBase : Create Place
+    DataBase -->> BusinessLogic : Place Creation Succesfull
+    BusinessLogic -->> API : Return Success
+    API -->> User : Successfully Place Creation Message (code 201)
+```
