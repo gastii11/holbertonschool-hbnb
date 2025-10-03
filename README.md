@@ -10,6 +10,7 @@ The idea is that this guide serves as support both for those working directly on
 
 <img width="681" height="1562" alt="Diagrama sin título drawio" src="https://github.com/user-attachments/assets/fcf29c2e-42fc-4061-ac7e-094296da252f" />
 
+# Detailed Class Diagram for Business Logic Layer
 
 ```mermaid
 classDiagram
@@ -81,7 +82,7 @@ classDiagram
 ```
 # Sequence Diagrams for API Calls
 
-## User Registration sequence
+# User Registration sequence
 
 ```mermaid
 sequenceDiagram
@@ -110,7 +111,7 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Registration Successfully Message (code 201)
 ```
-## Place Creation sequence
+# Place Creation sequence
 
 ```mermaid
 sequenceDiagram
