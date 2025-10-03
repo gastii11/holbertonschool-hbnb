@@ -90,21 +90,21 @@ sequenceDiagram
 
     User ->> API : Register User (API Call)
     API -->> API : Wrong Data
-    API -->> User : Wrong Data Error Message
+    API -->> User : Wrong Data Error Message (code 400)
 
     API ->> BusinessLogic : Validate and Process Request
     BusinessLogic -->> BusinessLogic : Validation Failed
     BusinessLogic -->> API : Return Error
-    API -->> User : Registration Failed Message
+    API -->> User : Registration Failed Message (code 401)
 
     BusinessLogic ->> Database : Check User Existense
     Database -->> Database : User Already Exist
     Database -->> BusinessLogic : Return Error
     BusinessLogic -->> API : Return Error
-    API -->> User : Registration Failed Message
+    API -->> User : Registration Failed Message (code 401)
 
     BusinessLogic ->> Database : Create User
     Database -->> BusinessLogic : Return Success
     BusinessLogic -->> API : Return Success
-    API -->> User : Registration Successfully Message
+    API -->> User : Registration Successfully Message (code 201)
 ```
