@@ -104,7 +104,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **Purpose:** Provides basic attributes common to all system entities.
 
-**Attributes:**
+## Attributes:
 
 **uuid:** Universal unique identifier.
 
@@ -118,7 +118,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **Purpose:** Represents the users registered in the system.
 
-**Attributes:**
+## Attributes:
 
 **first_name:** Userâ€™s first name.
 
@@ -130,7 +130,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **is_admin:** Indicates whether the user has admin privileges.
 
-**Methods:**
+## Methods:
 
 **register():** Creates a new user.
 
@@ -144,7 +144,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **Purpose:** Represents a place available for hosting or rental.
 
-**Attributes:**
+## Attributes:
 
 **owner:** The user who owns the place.
 
@@ -156,71 +156,71 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **latitude:** Latitude coordinate.
 
-longitude: Longitude coordinate.
+**longitude:** Longitude coordinate.
 
-amenities: List of amenities associated with the place.
+**amenities:** List of amenities associated with the place.
 
-Methods:
+## Methods:
 
-create(): Creates a new place.
+**create():** Creates a new place.
 
-update(): Updates place information.
+**update():** Updates place information.
 
-delete(): Deletes a place.
+**delete():** Deletes a place.
 
-list(): Returns the available places.
+**list():** Returns the available places.
 
 ### Class Amenity
 
-Type: Model
+**Type:** Model
 
-Purpose: Defines additional services that a place may offer (e.g., Wi-Fi, pool, parking).
+**Purpose:** Defines additional services that a place may offer (e.g., Wi-Fi, pool, parking).
 
-Attributes:
+## Attributes:
 
-name: Amenity name.
+**name:** Amenity name.
 
-description: Short description.
+**description:** Short description.
 
-Methods:
+## Methods:
 
-create(): Creates an amenity.
+**create():** Creates an amenity.
 
-update(): Updates amenity information.
+**update():** Updates amenity information.
 
-delete(): Deletes an amenity.
+**delete():** Deletes an amenity.
 
-list(): Lists all available amenities.
+**list():** Lists all available amenities.
 
 ### Class Review
 
-Type: Model
+**Type:** Model
 
-Purpose: Stores reviews written by users about places.
+**Purpose:** Stores reviews written by users about places.
 
-Attributes:
+## Attributes:
 
-comment: Review text.
+**comment:** Review text.
 
-rating: Numeric rating.
+**rating:** Numeric rating.
 
-Methods:
+## Methods:
 
-create(): Creates a review.
+**create():** Creates a review.
 
-update(): Updates a review.
+**update():** Updates a review.
 
-delete(): Deletes a review.
+**delete():** Deletes a review.
 
-list(): Lists existing reviews
+**list():** Lists existing reviews
 
 
 ## Relationships Between Classes
 
-Inheritance (--|>):
+**Inheritance (--|>):**
 All classes (User, Place, Amenity, Review) inherit from BaseModel, sharing identity and time-related attributes.
 
-Composition (o--):
+**Composition (o--):**
 
 Place composes User: each place belongs to one owner.
 
@@ -228,7 +228,7 @@ Place composes Amenity: a place can include multiple amenities.
 
 Place composes Review: a place can contain multiple reviews.
 
-Association (-->):
+**Association (-->):**
 
 User â†’ Review: A user can create multiple reviews.
 
