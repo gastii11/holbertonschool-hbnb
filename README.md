@@ -293,3 +293,59 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Successfully Place Creation Message (code 201)
 ```
+
+## Review Submission sequence
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant BusinessLogic
+    participant DataBase
+
+    User ->> API : Review Submission (API Call)
+    API -->> API : Wrong Data
+    API -->> User : Wrong Data Error Message
+
+    API ->> BusinessLogic : Validate and Process Request
+    BusinessLogic -->> BusinessLogic : Validation Failed
+    BusinessLogic -->> API : Return Error
+    API -->> User : Review Submission Failed Error Message
+
+    BusinessLogic ->> DataBase : Create Review
+    DataBase -->> BusinessLogic : Review Creation Succesfull
+    BusinessLogic -->> API : Return Success
+    API -->> User : Successfully Review Submission Message
+```
+
+## Fetching a List of Places sequence
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant BusinessLogic
+    participant DataBase
+
+    User ->> API : Fetching a List of Places (API Call)
+    API -->> API : Wrong Data
+    API -->> User : Wrong Data Error Message
+
+    API ->> BusinessLogic : Validate and Process Request
+    BusinessLogic -->> BusinessLogic : Validation Failed
+    BusinessLogic -->> API : Return Error
+    API -->> User : Fetching a List of Places <br> Failed Error Message
+
+    BusinessLogic ->> DataBase : Check Places List Existense
+    DataBase -->> DataBase : Places List Not Available
+    DataBase -->> BusinessLogic: Return Error
+    BusinessLogic -->> API : Return Error
+    API -->> User : No Places To Show Message
+
+    BusinessLogic ->> DataBase : Get Places List
+    DataBase -->> BusinessLogic : Return Places List
+    BusinessLogic -->> API : Return Success
+    API -->> User : Show Places List
+```
+
+
