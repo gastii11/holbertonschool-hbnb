@@ -217,10 +217,10 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 ## Relationships Between Classes
 
-**Inheritance (--|>):**
+**Inheritance:**
 All classes (User, Place, Amenity, Review) inherit from BaseModel, sharing identity and time-related attributes.
 
-**Composition (o--):**
+**Composition:**
 
 Place composes User: each place belongs to one owner.
 
@@ -228,9 +228,9 @@ Place composes Amenity: a place can include multiple amenities.
 
 Place composes Review: a place can contain multiple reviews.
 
-**Association (-->):**
+**Association:**
 
-User â†’ Review: A user can create multiple reviews.
+User associated Review: A user can create multiple reviews.
 
 
 # Sequence Diagrams for API Calls
