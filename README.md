@@ -265,6 +265,60 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Registration Successfully Message (code 201)
 ```
+
+## General Description
+
+The Register User use case allows a new user to create an account in the system.
+The process involves four main components: User, API, Business Logic Layer, and Database.
+The flow considers both successful scenarios and errors (incorrect data, existing user, failed validations).
+
+## Components
+
+**User:** Interacts with the system interface to submit registration data.
+
+**API:** Receives requests from the user and forwards the information to the business logic layer.
+
+**BusinessLogic:** Validates the information, checks for existing users, and applies business rules.
+
+**Database:** Stores the new user information persistently and returns confirmations or errors.
+
+## Process Flow
+### Main Flow (Successful Registration)
+
+1. The User submits the registration data to the API.
+
+2. The API forwards the request to BusinessLogic for validation.
+
+3. BusinessLogic validates the data and checks that the user does not already exist.
+
+4. If everything is correct, a request is sent to the Database to create the new user.
+
+5. The Database confirms the creation.
+
+6. BusinessLogic receives the confirmation and returns success to the API.
+
+7. The API sends the User a registration success message (HTTP 201).
+
+## Alternative Flows (Errors)
+
+### Incorrect Data
+
+If the data submitted by the user is invalid, BusinessLogic returns a validation error.
+
+The API responds with HTTP 400 and message: Wrong Data Error Message.
+
+### Failed Validation
+
+If the data does not meet the business rules (e.g., weak password), BusinessLogic returns an error.
+
+The API responds with HTTP 401 and message: Registration Failed Message.
+
+### User Already Exists
+
+If the user’s email is already registered, BusinessLogic detects the existing account and returns an error.
+
+The API responds with HTTP 401 and message: Registration Failed Message.
+
 # Place Creation sequence
 
 ```mermaid
