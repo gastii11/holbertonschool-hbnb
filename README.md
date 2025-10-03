@@ -104,7 +104,7 @@ Review: Stores comments and ratings about places.
 All classes inherit from BaseModel, ensuring consistency in identification and date handling.
 
 ## Class Documentation
-### Class BaseModel
+### <u>Class BaseModel</u>
 
 Type: Superclass
 
