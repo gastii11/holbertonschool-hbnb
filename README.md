@@ -80,6 +80,165 @@ classDiagram
     Place <-- Amenity : Association
     User --> Review : Association
 ```
+# Detailed Class Diagram for Business Logic Layer
+## Introduction
+
+This document describes the class model designed for the application. The goal is to model the system’s main entities, their attributes, operations, and the relationships between them, ensuring a clear structure for future implementation.
+
+The system is based on an HBnB-style model, where users can register places, manage amenities, and write reviews.
+
+## General Description
+
+The diagram consists of five main classes:
+
+BaseModel: A base class that provides common attributes for identity and time tracking.
+
+User: Represents the system’s users.
+
+Place: Defines available places.
+
+Amenity: Describes additional services or features for places.
+
+Review: Stores comments and ratings about places.
+
+All classes inherit from BaseModel, ensuring consistency in identification and date handling.
+
+## Class Documentation
+### Class BaseModel
+
+Type: Superclass
+
+Purpose: Provides basic attributes common to all system entities.
+
+Attributes:
+
+uuid: Universal unique identifier.
+
+creation_date: Creation date.
+
+last_update: Last modification date.
+
+### Class User
+
+Type: Model
+
+Purpose: Represents the users registered in the system.
+
+Attributes:
+
+first_name: User’s first name.
+
+last_name: User’s last name.
+
+email: User’s email address.
+
+password: Encrypted password.
+
+is_admin: Indicates whether the user has admin privileges.
+
+Methods:
+
+register(): Creates a new user.
+
+update(): Updates user information.
+
+delete(): Deletes a user.
+
+### Class Place
+
+Type: Model
+
+Purpose: Represents a place available for hosting or rental.
+
+Attributes:
+
+owner: The user who owns the place.
+
+title: Place title or name.
+
+description: Place description.
+
+price: Price per stay.
+
+latitude: Latitude coordinate.
+
+longitude: Longitude coordinate.
+
+amenities: List of amenities associated with the place.
+
+Methods:
+
+create(): Creates a new place.
+
+update(): Updates place information.
+
+delete(): Deletes a place.
+
+list(): Returns the available places.
+
+### Class Amenity
+
+Type: Model
+
+Purpose: Defines additional services that a place may offer (e.g., Wi-Fi, pool, parking).
+
+Attributes:
+
+name: Amenity name.
+
+description: Short description.
+
+Methods:
+
+create(): Creates an amenity.
+
+update(): Updates amenity information.
+
+delete(): Deletes an amenity.
+
+list(): Lists all available amenities.
+
+### Class Review
+
+Type: Model
+
+Purpose: Stores reviews written by users about places.
+
+Attributes:
+
+comment: Review text.
+
+rating: Numeric rating.
+
+Methods:
+
+create(): Creates a review.
+
+update(): Updates a review.
+
+delete(): Deletes a review.
+
+list(): Lists existing reviews
+
+
+## Relationships Between Classes
+
+Inheritance (--|>):
+All classes (User, Place, Amenity, Review) inherit from BaseModel, sharing identity and time-related attributes.
+
+Composition (o--):
+
+Place composes User: each place belongs to one owner.
+
+Place composes Amenity: a place can include multiple amenities.
+
+Place composes Review: a place can contain multiple reviews.
+
+Association (-->):
+
+User → Review: A user can create multiple reviews.
+
+
 # Sequence Diagrams for API Calls
 
 # User Registration sequence
