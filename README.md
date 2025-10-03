@@ -98,13 +98,13 @@ All classes inherit from BaseModel, ensuring that they share a unified structure
 This structure establishes a solid foundation for representing the applicationâ€™s domain and provides a clear blueprint for implementation in code.
 
 ## Class Documentation
-### Class BaseModel
+## Class BaseModel
 
 **Type:** Superclass
 
 **Purpose:** Provides basic attributes common to all system entities.
 
-## Attributes:
+### Attributes:
 
 **uuid:** Universal unique identifier.
 
@@ -112,13 +112,13 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **last_update:** Last modification date.
 
-### Class User
+## Class User
 
 **Type:** Model
 
 **Purpose:** Represents the users registered in the system.
 
-## Attributes:
+### Attributes:
 
 **first_name:** Userâ€™s first name.
 
@@ -130,7 +130,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **is_admin:** Indicates whether the user has admin privileges.
 
-## Methods:
+### Methods:
 
 **register():** Creates a new user.
 
@@ -138,13 +138,13 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **delete():** Deletes a user.
 
-### Class Place
+## Class Place
 
 **Type:** Model
 
 **Purpose:** Represents a place available for hosting or rental.
 
-## Attributes:
+### Attributes:
 
 **owner:** The user who owns the place.
 
@@ -160,7 +160,7 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **amenities:** List of amenities associated with the place.
 
-## Methods:
+### Methods:
 
 **create():** Creates a new place.
 
@@ -170,19 +170,19 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **list():** Returns the available places.
 
-### Class Amenity
+## Class Amenity
 
 **Type:** Model
 
 **Purpose:** Defines additional services that a place may offer (e.g., Wi-Fi, pool, parking).
 
-## Attributes:
+### Attributes:
 
 **name:** Amenity name.
 
 **description:** Short description.
 
-## Methods:
+### Methods:
 
 **create():** Creates an amenity.
 
@@ -192,19 +192,19 @@ This structure establishes a solid foundation for representing the applicationâ€
 
 **list():** Lists all available amenities.
 
-### Class Review
+## Class Review
 
 **Type:** Model
 
 **Purpose:** Stores reviews written by users about places.
 
-## Attributes:
+### Attributes:
 
 **comment:** Review text.
 
 **rating:** Numeric rating.
 
-## Methods:
+### Methods:
 
 **create():** Creates a review.
 
