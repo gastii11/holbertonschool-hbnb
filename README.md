@@ -8,7 +8,45 @@ HBnB allows the management of data such as users, places to stay, reviews, and m
 
 The idea is that this guide serves as support both for those working directly on the project and for those who need to understand or maintain it in the future.
 
+## What is a Three-Tier Architecture?
+
+Three-tier architecture is a software design pattern that organizes an application into three independent layers, each with clearly defined responsibilities. This approach separates the presentation logic, business logic, and data access logic, promoting better code organization, greater maintainability, and system scalability.
+
+## The three layers of the architecture are:
+
+### Presentation Layer
+This is the top layer that users interact with directly. Its function is to display information and collect input from the user. It acts as the user interface of the application, rendering web pages and handling user requests.
+
+### Application Layer (or Business Logic Layer)
+This middle layer acts as the "brain" of the application, processing requests from the presentation layer and applying core business rules. It manages key application logic such as user authentication, data validation, and business workflows. It processes information from the presentation layer and interacts with the data layer.
+
+### Data Layer (or Persistence Layer)
+This is the back-end layer that stores and manages the application's data. It is only accessed by the application layer, never directly by the presentation layer. It handles data storage, retrieval, and manipulation, ensuring persistence across user sessions.
+
 <img width="681" height="1561" alt="Diagrama sin fondo y flechas negras drawio" src="https://github.com/user-attachments/assets/6c21753e-840e-43e3-9719-212b4137bdad" />
+
+## Use of the Facade Pattern in a Three-Tier Architecture
+### What is the Facade Pattern?
+
+The Facade pattern provides a single, simplified interface to a complex system, acting as a front-facing layer that hides the intricacies of underlying components and their interactions. It improves code readability and usability by reducing dependencies and offering a clearer entry point for clients to interact with a subsystem without needing to understand its internal complexity.
+
+## Where is the Facade Pattern applied in HBnB?
+
+In the three-tier architecture, the Facade pattern is applied in the Core layer, serving as a unified gateway between the API and the business logic.
+
+Without Facade: The API would need to directly access all the Core classes (User, Place, Review, Amenity) and understand how to interact with each of them, leading to tight coupling.
+
+With Facade: The API interacts only with a central class or module (a "facade"), which internally coordinates all necessary operations. This simplifies communication and improves modularity.
+
+## Database Operations in a Three-Tier Architecture
+
+Database operations refer to the fundamental actions of creating, reading, updating, and deleting (CRUD) data within the application's back-end database.
+
+The purpose of the Data Access Layer is to isolate data access from the rest of the application. This way, the upper layers (like the business logic or API) don’t need to know how the database operations are implemented or worry about SQL statements, database connections, or transaction handling.
+
+By encapsulating these concerns in a dedicated layer, the system becomes more modular, testable, and easier to maintain.
+
+
 
 # Detailed Class Diagram for Business Logic Layer
 
