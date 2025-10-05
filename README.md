@@ -17,10 +17,10 @@ Three-tier architecture is a software design pattern that organizes an applicati
 ### Presentation Layer
 This is the top layer that users interact with directly. Its function is to display information and collect input from the user. It acts as the user interface of the application, rendering web pages and handling user requests.
 
-### Application Layer (or Business Logic Layer)
+### Business Logic Layer
 This middle layer acts as the "brain" of the application, processing requests from the presentation layer and applying core business rules. It manages key application logic such as user authentication, data validation, and business workflows. It processes information from the presentation layer and interacts with the data layer.
 
-### Data Layer (or Persistence Layer)
+### Persistence Layer
 This is the back-end layer that stores and manages the application's data. It is only accessed by the application layer, never directly by the presentation layer. It handles data storage, retrieval, and manipulation, ensuring persistence across user sessions.
 
 <img width="681" height="1561" alt="Diagrama sin fondo y flechas negras drawio" src="https://github.com/user-attachments/assets/6c21753e-840e-43e3-9719-212b4137bdad" />
