@@ -547,6 +547,54 @@ sequenceDiagram
     API -->> User : Show Places List (code 200)
 ```
 
+## General Description
+The Fetch Places List use case allows a user to retrieve a list of places stored in the system. The process involves four main components: User, API, Business Logic Layer, and Database. The flow considers both successful scenarios and error cases (incorrect data, failed validations, list not available).
+
+## Components
+User: Interacts with the system interface to request a list of places.
+
+
+API: Receives the request from the user and forwards it to the Business Logic Layer.
+
+
+BusinessLogic: Validates the request, applies business rules, and checks data availability.
+
+
+Database: Stores and returns the list of places or related errors.
+
+## Process Flow
+### Main Flow (Successful Fetching of Places List)
+1. The User requests the list of places through the API.
+
+2. The API forwards the request to BusinessLogic for validation and processing.
+
+3. BusinessLogic validates the data and ensures the list exists in the Database.
+
+4. BusinessLogic sends a request to the Database to get the list of places.
+
+5. The Database returns the list of places to BusinessLogic.
+
+6. BusinessLogic returns the list to the API.
+
+7. The API sends the User the list of places with a success message (HTTP 200).
+
+## Alternative Flows (Errors)
+### Incorrect Data
+If the request contains invalid or malformed data, the API directly detects it.
+
+The API responds with HTTP 400 and message: Wrong Data Error Message.
+
+## Failed Validation
+If the request fails to meet business rules (e.g., missing parameters), BusinessLogic returns an error.
+
+The API responds with HTTP 401 and message: Fetching a List of Places Failed Error Message.
+
+## Places List Not Available
+If the requested list of places does not exist or is empty, BusinessLogic detects it through the Database.
+
+The API responds with HTTP 401 and message: No Places To Show Message.
+
+
 ## HTTP Response Codes Explanation
 
 **200:** OK - Successful request (no new resource created)
