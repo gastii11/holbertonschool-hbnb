@@ -504,8 +504,14 @@ sequenceDiagram
 ## HTTP Response Codes Explanation
 
 **200:** OK - Successful request (no new resource created)
+
+
 **201:** Created - New resource successfully created
+
+
 **400:** Bad Request - Invalid or missing input data
+
+
 **401:** Unauthorized / Validation Failed - Business rule violation or existing record
 
 
