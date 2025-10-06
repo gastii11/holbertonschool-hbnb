@@ -471,6 +471,52 @@ sequenceDiagram
     API -->> User : Successfully Review Submission Message (code 201)
 ```
 
+## General Description
+The Submit Review use case allows a user to send a review through the system. The process involves four main components: User, API, Business Logic Layer, and Database. The flow includes both successful and alternative error scenarios (e.g., wrong data, validation failures).
+
+## Components
+User: Interacts with the system interface to submit a review.
+
+
+API: Receives the review submission request and forwards it to the business logic layer.
+
+
+BusinessLogic: Validates the review data and applies business rules.
+
+
+Database: Stores the review and returns confirmations or error messages.
+
+## Process Flow
+### Main Flow (Successful Review Submission)
+1. The User submits a review via the API.
+
+2. The API forwards the request to the BusinessLogic for validation and processing.
+
+3. The BusinessLogic validates the review and ensures it meets the required rules.
+
+4. If everything is correct, BusinessLogic sends a request to the Database to store the review.
+ 
+5. The Database confirms the creation of the review.
+
+6. BusinessLogic returns the success response to the API.
+
+7. The API returns a successful review submission message to the User (HTTP 201).
+
+## Alternative Flows (Errors)
+### Incorrect Data
+If the review data is incorrect or malformed:
+
+The API detects the issue and returns a validation error.
+
+The User receives: Wrong Data Error Message (HTTP 400).
+
+### Failed Validation
+If the review fails business logic validation (e.g., empty comment, invalid rating):
+
+BusinessLogic returns an error to the API.
+
+The API responds to the User with: Review Submission Failed Error Message (HTTP 401).
+
 ## Fetching a List of Places sequence
 
 ```mermaid
