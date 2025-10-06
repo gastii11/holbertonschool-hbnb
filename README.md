@@ -386,6 +386,65 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Successfully Place Creation Message (code 201)
 ```
+## General Description
+
+The Place Creation use case allows a user to create a new Place within the system.
+The process covers the entire flow — from when the user submits the place data until the system validates and stores it in the database.
+This flow includes both successful and error scenarios such as invalid data, validation failure, or an already existing place.
+
+## Components
+
+User: Interacts with the system interface to create a new place.
+
+API: Receives the user’s request, performs initial checks, and forwards it to the business logic layer.
+
+BusinessLogic: Applies business rules, verifies if the place already exists, and handles the creation process.
+
+Database: Stores the new place information and returns confirmation or error messages.
+
+## Process Flow
+### Main Flow
+
+1. The User sends a request to the API to create a new place.
+
+2. The API receives the request and forwards it to the BusinessLogic layer.
+
+3. BusinessLogic validates the received data.
+
+4. It checks the Database to verify if the place already exists.
+
+5. If the place does not exist, BusinessLogic requests the Database to create a new record.
+
+6. The Database confirms that the place was successfully created.
+
+7. BusinessLogic sends a success message back to the API.
+
+8. The API responds to the User with a successful creation message (HTTP 201).
+
+## Alternative Flows
+### Invalid Data
+
+If the data sent by the user is invalid (missing fields, wrong format, etc.), the API returns:
+
+HTTP Code: 400
+
+Message: Wrong Data Error Message.
+
+### Validation Failed
+
+If the BusinessLogic detects that the data does not meet business rules (e.g., too short name, invalid location):
+
+HTTP Code: 401
+
+Message: Place Creation Failed Error Message.
+
+### Place Already Exists
+
+If the place already exists in the database, BusinessLogic returns an error:
+
+HTTP Code: 401
+
+Message: Place Creation Failed Error Message
 
 ## Review Submission sequence
 
