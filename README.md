@@ -403,7 +403,8 @@ BusinessLogic: Applies business rules, verifies if the place already exists, and
 Database: Stores the new place information and returns confirmation or error messages.
 
 ## Process Flow
-### Main Flow
+### Main Flow (Successful Registration)
+
 
 1. The User sends a request to the API to create a new place.
 
@@ -421,7 +422,7 @@ Database: Stores the new place information and returns confirmation or error mes
 
 8. The API responds to the User with a successful creation message (HTTP 201).
 
-## Alternative Flows
+## Alternative Flows (Errors)
 ### Invalid Data
 
 If the data sent by the user is invalid (missing fields, wrong format, etc.), the API returns:
@@ -499,5 +500,12 @@ sequenceDiagram
     BusinessLogic -->> API : Return Success
     API -->> User : Show Places List (code 200)
 ```
+
+## HTTP Response Codes Explanation
+
+**200:** OK - Successful request (no new resource created)
+**201:** Created - New resource successfully created
+**400:** Bad Request - Invalid or missing input data
+**401:** Unauthorized / Validation Failed - Business rule violation or existing record
 
 
