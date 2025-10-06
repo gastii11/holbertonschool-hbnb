@@ -584,12 +584,12 @@ If the request contains invalid or malformed data, the API directly detects it.
 
 The API responds with HTTP 400 and message: Wrong Data Error Message.
 
-## Failed Validation
+### Failed Validation
 If the request fails to meet business rules (e.g., missing parameters), BusinessLogic returns an error.
 
 The API responds with HTTP 401 and message: Fetching a List of Places Failed Error Message.
 
-## Places List Not Available
+### Places List Not Available
 If the requested list of places does not exist or is empty, BusinessLogic detects it through the Database.
 
 The API responds with HTTP 401 and message: No Places To Show Message.
