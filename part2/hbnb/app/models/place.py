@@ -1,0 +1,51 @@
+from app.models.base import BaseModel
+
+class Place(BaseModel):
+    def __init__(self, title, price, latitude, longitude, owner, description=None):
+        super().__init__()
+        self.title = title
+        self.price = price
+        self.latitude = latitude
+        self.longitude = longitude
+        self.description = description or ""
+        self.owner = owner
+
+    @property
+    def title(self):
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        if not value or len(value) > 100:
+            raise ValueError("Title is required and must be <= 100 characters.")
+        self._title = value
+
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        if value <= 0:
+            raise ValueError("Price must be positive.")
+        self._price = value
+
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        if not -90.0 <= value <= 90.0:
+            raise ValueError("Latitude out of bounds.")
+        self._latitude = value
+
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        if not -180.0 <= value <= 180.0:
+            raise ValueError("Longitude out of bounds.")
+        self._longitude = value
