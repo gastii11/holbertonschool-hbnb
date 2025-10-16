@@ -1,20 +1,16 @@
-<<<<<<< HEAD
 from app.models.basemodel import BaseModel
+from app.models.review import Review
+from app.models.place import Place
+from email_validator import validate_email, EmailNotValidError
 
 
 class User(BaseModel):
     def __init__(self, first_name: str, last_name: str, email: str, is_admin: bool = False):
         super().__init__()
-=======
-class User(BaseModel):
-    def __init__(self, id=str, first_name=str, last_name=str, email=str, is_admin=bool):
-        self.id = id
->>>>>>> 11dbe79 (push por error)
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.is_admin = is_admin
-<<<<<<< HEAD
         self.places = []  # lista de lugares que posee
 
 
@@ -75,7 +71,4 @@ class User(BaseModel):
         if review not in self.reviews:
             self.reviews.append(review)
             review.user = self
-=======
-    
-    
->>>>>>> 11dbe79 (push por error)
+

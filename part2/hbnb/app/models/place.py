@@ -1,5 +1,7 @@
-<<<<<<< HEAD
-from app.models.base import BaseModel
+from app.models.basemodel import BaseModel
+from app.models.review import Review
+from app.models.amenity import Amenity
+
 
 class Place(BaseModel):
     def __init__(self, title, price, latitude, longitude, owner, description=None):
@@ -63,26 +65,21 @@ class Place(BaseModel):
         - Evita duplicados.
         - Asigna este Place como lugar de la Review.
         """
-    if not isinstance(review, Review):
-        raise TypeError("Debe ser una instancia de Review")
-    if review not in self.reviews:
-        self.reviews.append(review)
+        if not isinstance(review, Review):
+            raise TypeError("Debe ser una instancia de Review")
+        if review not in self.reviews:
+            self.reviews.append(review)
 
-def add_amenity(self, amenity):
-     """
+    def add_amenity(self, amenity):
+        """
         Agrega un Amenity al Place.
         - Valida que sea instancia de Amenity.
         - Evita duplicados.
         - Mantiene relación doble: agrega el Place a Amenity.places
         """
-    if not isinstance(amenity, Amenity):
-        raise TypeError("Debe ser una instancia de Amenity")
-    if amenity not in self.amenities:
-        self.amenities.append(amenity)
+        if not isinstance(amenity, Amenity):
+            raise TypeError("Debe ser una instancia de Amenity")
+        if amenity not in self.amenities:
+            self.amenities.append(amenity)
         if self not in amenity.places:
             amenity.places.append(self)  # relación doble
-=======
-class Place(BaseModel):
-    def __init__(self, id=str, title=str, description=str, price=float, latitude=float, longitude=float):
-        
->>>>>>> 11dbe79 (push por error)
