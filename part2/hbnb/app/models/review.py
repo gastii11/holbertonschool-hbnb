@@ -1,6 +1,5 @@
 from app.models.basemodel import BaseModel
-from app.models.user import User
-from app.models.place import Place
+
 
 class Review(BaseModel):
     def __init__(self, text, rating, place, user):
@@ -33,6 +32,7 @@ class Review(BaseModel):
         self._rating = value
 
     def set_user(self, user):
+        from app.models.user import User
         """
         Asigna un User como autor de la Review.
         - Valida tipo.
@@ -45,6 +45,7 @@ class Review(BaseModel):
             user.reviews.append(self)
 
     def set_place(self, place):
+        from app.models.place import Place
         """
         Asigna un Place a la Review.
         - Valida tipo.

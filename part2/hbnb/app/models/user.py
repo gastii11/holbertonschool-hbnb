@@ -1,6 +1,6 @@
 from app.models.basemodel import BaseModel
-from app.models.review import Review
 from app.models.place import Place
+from app.models.review import Review
 from email_validator import validate_email, EmailNotValidError
 
 

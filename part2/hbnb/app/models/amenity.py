@@ -1,5 +1,5 @@
 from app.models.basemodel import BaseModel
-from app.models.place import Place
+
 
 class Amenity(BaseModel):
     def __init__(self, name):
@@ -18,6 +18,7 @@ class Amenity(BaseModel):
         self._name = value
 
     def add_place(self, place):
+        from app.models.place import Place
         """
         Agrega un Place al Amenity.
         - Valida tipo.
