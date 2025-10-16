@@ -55,7 +55,28 @@ class Place(BaseModel):
             raise ValueError("Longitude out of bounds.")
         self._longitude = value
 
-    def add_amenity(self, amenity):
-        self.amenities.append(amenity) # Añade un objeto Amenity a la lista de amenities del Place.
-        amenity.places.append(self)  # relación doble, relacion bidireccional
-    
+    def add_review(self, review):
+        """
+        Agrega una Review al Place.
+        - Valida que sea instancia de Review.
+        - Evita duplicados.
+        - Asigna este Place como lugar de la Review.
+        """
+    if not isinstance(review, Review):
+        raise TypeError("Debe ser una instancia de Review")
+    if review not in self.reviews:
+        self.reviews.append(review)
+
+def add_amenity(self, amenity):
+     """
+        Agrega un Amenity al Place.
+        - Valida que sea instancia de Amenity.
+        - Evita duplicados.
+        - Mantiene relación doble: agrega el Place a Amenity.places
+        """
+    if not isinstance(amenity, Amenity):
+        raise TypeError("Debe ser una instancia de Amenity")
+    if amenity not in self.amenities:
+        self.amenities.append(amenity)
+        if self not in amenity.places:
+            amenity.places.append(self)  # relación doble

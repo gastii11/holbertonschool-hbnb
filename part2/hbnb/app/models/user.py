@@ -42,3 +42,29 @@ class User(BaseModel):
             self._email = email_validation.normalized
         except EmailNotValidError:
             raise ValueError("Invalid email format")
+
+    def add_place(self, place):
+        """
+        Agrega un Place al usuario.
+        - Valida que sea instancia de Place.
+        - Evita duplicados.
+        - Asigna este usuario como owner del Place.
+        """
+        if not isinstance(place, Place):
+            raise TypeError("Debe ser una instancia de Place")
+        if place not in self.places:
+            self.places.append(place)
+            place.owner = self
+
+    def add_review(self, review):
+        """
+        Agrega una Review al usuario.
+        - Valida que sea instancia de Review.
+        - Evita duplicados.
+        - Asigna este usuario como autor de la Review.
+        """
+        if not isinstance(review, Review):
+            raise TypeError("Debe ser una instancia de Review")
+        if review not in self.reviews:
+            self.reviews.append(review)
+            review.user = self

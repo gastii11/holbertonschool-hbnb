@@ -29,3 +29,27 @@ class Review(BaseModel):
         if not (1 <= value <= 5):
             raise ValueError("Rating must be between 1 and 5.")
         self._rating = value
+
+    def set_user(self, user):
+        """
+        Asigna un User como autor de la Review.
+        - Valida tipo.
+        - Evita duplicados en user.reviews.
+        """
+        if not isinstance(user, User):
+            raise TypeError("Debe ser una instancia de User")
+        self.user = user
+        if self not in user.reviews:
+            user.reviews.append(self)
+
+    def set_place(self, place):
+        """
+        Asigna un Place a la Review.
+        - Valida tipo.
+        - Evita duplicados en place.reviews.
+        """
+        if not isinstance(place, Place):
+            raise TypeError("Debe ser una instancia de Place")
+        self.place = place
+        if self not in place.reviews:
+            place.reviews.append(self)

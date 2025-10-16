@@ -15,3 +15,17 @@ class Amenity(BaseModel):
         if not value or len(value) > 50:
             raise ValueError("Amenity name is required and must not exceed 50 characters")
         self._name = value
+
+    def add_place(self, place):
+        """
+        Agrega un Place al Amenity.
+        - Valida tipo.
+        - Evita duplicados.
+        - Mantiene relación doble: agrega el Amenity al Place.amenities
+        """
+        if not isinstance(place, Place):
+            raise TypeError("Debe ser una instancia de Place")
+        if place not in self.places:
+            self.places.append(place)
+            if self not in place.amenities:
+                place.amenities.append(self)
