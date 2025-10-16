@@ -8,6 +8,8 @@ class User(BaseModel):
         self.last_name = last_name
         self.email = email
         self.is_admin = is_admin
+        self.places = []  # lista de lugares que posee
+
 
     @property
     def first_name(self):

@@ -3,6 +3,8 @@ from app.models.base import BaseModel
 class Review(BaseModel):
     def __init__(self, text, rating, place, user):
         super().__init__()
+        self.user = user  # asociación con User (asociasion)
+        self.place = place # asociación con Place (asociasion)
         self.text = text
         self.rating = rating
         self.place = place
