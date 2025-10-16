@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from app.models.base import BaseModel
 
 class Place(BaseModel):
@@ -80,3 +81,8 @@ def add_amenity(self, amenity):
         self.amenities.append(amenity)
         if self not in amenity.places:
             amenity.places.append(self)  # relación doble
+=======
+class Place(BaseModel):
+    def __init__(self, id=str, title=str, description=str, price=float, latitude=float, longitude=float):
+        
+>>>>>>> 11dbe79 (push por error)
