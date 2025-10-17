@@ -15,7 +15,7 @@ class AmenityList(Resource):
     @api.response(400, 'Invalid input data')
     def post(self):
         """Register a new amenity"""
-        amenity_data = api,payload
+        amenity_data = api.payload
 
         new_amenity = facade.create_amenity(amenity_data)
         return {
@@ -56,7 +56,7 @@ class AmenityResource(Resource):
         """Update an amenity's information"""
         amenity = facade.get_amenity(amenity_id)
         if not amenity:
-            return {'error': 'Amenity not found'}
+            return {'error': 'Amenity not found'}, 404
 
         updated_data = api.payload
         updated_id = facade.update_amenity(amenity_id, amenity_data)

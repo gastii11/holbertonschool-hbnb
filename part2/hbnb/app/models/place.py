@@ -4,18 +4,16 @@ from app.models.amenity import Amenity
 
 
 class Place(BaseModel):
-    def __init__(self, title, price, latitude, longitude, owner, description=None):
+    def __init__(self, title, price, latitude, longitude, owner_id, description=None):
         super().__init__()
-        self.owner = owner  # relación con User (composición)
+        self.owner_id = owner_id  # relación con User (composición)
         self.title = title
         self.price = price
         self.latitude = latitude
         self.longitude = longitude
         self.description = description or ""
-        self.owner = owner
         self.amenities = []  # relación con Amenity
 
-        owner.places.append(self) # agregamos el lugar al usuario dueño
 
 
     @property
