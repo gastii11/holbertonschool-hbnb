@@ -641,3 +641,65 @@ hbnb/
 ├── README.md
 ```
 
+## Project Structure: hbnb/
+### app/
+Contains the main application logic, organized into layers (API, models, services, and persistence).
+
+#### __init__.py (inside app/)
+Initializes the Flask application using the App Factory Pattern.
+This file sets up the app, loads configurations, and registers blueprints and extensions.
+
+### api/
+
+Holds all the API endpoints that expose the system’s functionality.
+
+#### __init__.py
+Marks this directory as a Python package and enables the loading of different API versions.
+
+### api/v1/
+
+First version of the API (v1). Contains all route definitions for managing the system’s resources.
+
+#### __init__.py
+Registers the namespaces or main routes for version 1 of the API.
+
+#### users.py
+Defines endpoints related to User management — creating, retrieving, updating, and deleting users.
+
+#### places.py
+Contains endpoints for Place management, including CRUD operations and handling relationships with users and amenities.
+
+#### reviews.py
+Manages Review endpoints, allowing users to create and retrieve feedback about specific places.
+
+#### amenities.py
+Defines endpoints for Amenity resources, managing the features or services associated with places.
+
+### models/
+
+Represents the domain layer of the system, where the main entities and their behaviors are defined.
+
+#### __init__.py
+Marks this folder as a Python module and may include shared model initialization code.
+
+#### user.py
+Defines the User class, including attributes such as name, email, and permissions, along with its methods.
+
+#### place.py
+Contains the Place class, representing a location and its relationships with User, Review, and Amenity.
+
+#### review.py
+Defines the Review class, representing user feedback or comments about a specific place.
+
+#### amenity.py
+Defines the Amenity class, representing a service or feature available at a place (e.g., Wi-Fi, pool, parking
+
+## services/
+
+Implements the business logic layer and acts as a bridge between the models, API, and persistence layers.
+
+#### __init__.py
+Initializes a singleton instance of the Facade, ensuring the entire app uses the same service interface.
+
+#### facade.py
+Defines the Facade class, which acts as a unified interface to interact with models and the repository, simplifying internal complexity.
