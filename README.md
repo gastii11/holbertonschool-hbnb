@@ -608,4 +608,33 @@ The API responds with HTTP 401 and message: No Places To Show Message.
 
 **401:** Unauthorized / Validation Failed - Business rule violation or existing record
 
+## The Project Directory Structure
 
+hbnb/
+├── app/
+│   ├── __init__.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── v1/
+│   │       ├── __init__.py
+│   │       ├── users.py
+│   │       ├── places.py
+│   │       ├── reviews.py
+│   │       ├── amenities.py
+│   ├── models/
+│   │   ├── __init__.py
+|   |   |── basemodel.py
+│   │   ├── user.py
+│   │   ├── place.py
+│   │   ├── review.py
+│   │   ├── amenity.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── facade.py
+│   ├── persistence/
+│       ├── __init__.py
+│       ├── repository.py
+├── run.py
+├── config.py
+├── requirements.txt
+├── README.md
