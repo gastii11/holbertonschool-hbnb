@@ -641,3 +641,114 @@ hbnb/
 ├── README.md
 ```
 
+## app/
+
+Main application folder — contains the source code for the Flask app, divided into logical layers.
+
+### __init__.py
+
+Initializes the Flask app using the App Factory Pattern.
+Sets up configuration, routes, and extensions for the application.
+
+## app/api/
+
+Contains the API endpoints that expose the system’s functionality.
+
+### __init__.py
+
+Marks this directory as a Python package and prepares it to load API versions.
+
+## app/api/v1/
+
+Holds version 1 of the REST API, defining all routes for system resources.
+
+### __init__.py
+
+Registers the API namespaces (users, places, reviews, amenities).
+
+### users.py
+
+Endpoints for managing users (create, read, update, delete).
+
+### places.py
+
+Endpoints for managing places and their relationships with users and amenities.
+
+### reviews.py
+
+Endpoints for managing user reviews on places.
+
+### amenities.py
+
+Endpoints for managing amenities (Wi-Fi, pool, parking, etc.).
+
+## app/models/
+
+Defines the domain layer, where the main entities and their behavior are implemented.
+
+### __init__.py
+
+Makes the directory a Python module and may include shared initialization code.
+
+### user.py
+
+Defines the User class (name, email, permissions, etc.).
+
+### place.py
+
+Defines the Place class (location info, owner, amenities, reviews).
+
+### review.py
+
+Defines the Review class (feedback from users about places).
+
+### amenity.py
+
+Defines the Amenity class (features or services offered at a place)
+
+## app/services/
+
+Implements the business logic layer, acting as a bridge between the API, models, and persistence.
+
+### __init__.py
+
+Creates a singleton instance of the Facade, ensuring consistent access across the app.
+
+### facade.py
+
+Defines the Facade class, which provides a unified interface to interact with models and data repositories.
+
+## app/persistence/
+
+Handles the data access layer — currently using an in-memory repository, but structured to support future database integration.
+
+### __init__.py
+
+Marks the directory as a module and can initialize repository instances.
+
+### repository.py
+
+Implements the in-memory repository, managing CRUD operations for all entities and defining an extensible interface for future persistence layers.
+
+## run.py
+
+Main entry point of the application.
+Launches the Flask app created by the App Factory and starts the API server.
+
+## config.py
+
+Contains configuration settings such as environment variables, database connections, and secret keys.
+Supports different modes like development, testing, and production.
+
+requirements.txt
+
+Lists all Python dependencies required to run the project.
+Install them with:
+```text
+pip install -r requirements.txt
+```
+
+## README.md
+
+The main documentation file for the project.
+Provides information about setup, usage, and overall system structure.
