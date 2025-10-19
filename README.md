@@ -743,12 +743,39 @@ Supports different modes like development, testing, and production.
 requirements.txt
 
 Lists all Python dependencies required to run the project.
-Install them with:
-```text
-pip install -r requirements.txt
-```
+
 
 ## README.md
 
 The main documentation file for the project.
 Provides information about setup, usage, and overall system structure.
+
+
+## Installation & Usage
+
+1. Clone the Repository
+```bash
+git clone https://github.com/gastii11/holbertonschool-hbnb.git
+```
+
+2. Create a Virtual Environment and activate it
+Go to part2 dir
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+```
+
+3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the Application
+```bash
+python3 run.py
+```
+
+5. Local URL
+```bash
+http://localhost:5000/
+```
