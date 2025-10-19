@@ -2,14 +2,12 @@ from app.models.basemodel import BaseModel
 
 
 class Review(BaseModel):
-    def __init__(self, text, rating, place, user):
+    def __init__(self, text, rating, place_id, user_id):
         super().__init__()
-        self.user = user  # asociación con User (asociasion)
-        self.place = place # asociación con Place (asociasion)
+        self.user_id = user_id # asociación con User (asociasion)
+        self.place_id = place_id # asociación con Place (asociasion)
         self.text = text
         self.rating = rating
-        self.place = place
-        self.user = user
 
     @property
     def text(self):

@@ -81,4 +81,8 @@ class HBnBFacade:
         return self.review_repo.update(review_id, review_data)
 
     def delete_review(self, review_id):
-        return self.review_repo.delete(review_id, [])
+        review = self.review_repo.get(review_id)
+        if not review:
+            return False
+        self.review_repo.delete(review_id)
+        return True
