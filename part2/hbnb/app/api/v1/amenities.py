@@ -54,13 +54,10 @@ class AmenityResource(Resource):
     @api.response(400, 'Invalid input data')
     def put(self, amenity_id):
         """Update an amenity's information"""
-        amenity = facade.get_amenity(amenity_id)
-        if not amenity:
-            return {'error': 'Amenity not found'}, 404
+        amenity_data = api.payload
+        facade.update_amenity(amenity_id, amenity_data)
+        updated_amenity = facade.get_amenity(amenity_id)
 
-        updated_data = api.payload
-        updated_id = facade.update_amenity(amenity_id, amenity_data)
-        return {
-            'id': updated_amenity.id,
-            'name': updated_amenity.name
-        }, 200
+        if not updated_amenity:
+            return {'error': 'Amenity not found'}, 404
+        return {'message': 'Amenity updated successfully'}, 200
