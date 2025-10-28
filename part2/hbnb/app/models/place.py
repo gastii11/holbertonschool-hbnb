@@ -13,6 +13,7 @@ class Place(BaseModel):
         self.longitude = longitude
         self.description = description or ""
         self.amenities = []  # relación con Amenity
+        self.reviews = []
 
 
 

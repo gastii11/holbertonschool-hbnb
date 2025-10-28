@@ -114,7 +114,7 @@ class PlaceResource(Resource):
             return {'error': 'Place not found'}
         return {'message': 'Place updated successfully'}
 
-@api.route('/<string:place_id>/reviews')
+@api.route('/<place_id>/reviews')
 class PlaceReviewList(Resource):
     @api.response(200, 'List of reviews for the place retrieved successfully')
     @api.response(404, 'Place not found')
