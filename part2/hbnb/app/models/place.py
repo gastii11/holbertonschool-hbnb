@@ -4,7 +4,7 @@ from app.models.amenity import Amenity
 
 
 class Place(BaseModel):
-    def __init__(self, title, price, latitude, longitude, owner_id, description=None):
+    def __init__(self, title, price, latitude, longitude, owner_id, description=None, amenities=None, reviews=None):
         super().__init__()
         self.owner_id = owner_id  # relación con User (composición)
         self.title = title
@@ -12,8 +12,8 @@ class Place(BaseModel):
         self.latitude = latitude
         self.longitude = longitude
         self.description = description or ""
-        self.amenities = []  # relación con Amenity
-        self.reviews = []
+        self.amenities = amenities or [] # relación con Amenity
+        self.reviews = reviews or []
 
 
 

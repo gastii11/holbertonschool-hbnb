@@ -53,7 +53,7 @@ class PlaceList(Resource):
             'price': new_place.price,
             'latitude': new_place.latitude,
             'longitude': new_place.longitude,
-            'owner_id': new_place.owner_id,
+            'owner_id': new_place.owner_id
         }, 201
 
     @api.response(200, 'List of places retrieved successfully')
@@ -64,12 +64,8 @@ class PlaceList(Resource):
             {
                 'id': place.id,
                 'title': place.title,
-                'description': place.description,
-                'price': place.price,
                 'latitude': place.latitude,
                 'longitude': place.longitude,
-                'owner_id': place.owner_id,
-                'amenities': place.amenities
             } for place in places
         ], 200
 
@@ -81,6 +77,7 @@ class PlaceResource(Resource):
         """Get place details by ID"""
         place = facade.get_place(place_id)
         user = facade.get_user(place.owner_id)
+        amenities = facade.get_amenity(place.amenities)
         if not place:
             return {'error': 'Place not found'}, 404
         return {
@@ -96,7 +93,12 @@ class PlaceResource(Resource):
                 'last_name': user.last_name,
                 'email': user.email
             },
-            'amenities': place.amenities
+            'amenities': [
+                {
+                    "id": amenity.id,
+                    "name": amenity.name
+                } for amenity in amenities
+            ]
         }, 200
 
     @api.expect(place_model)

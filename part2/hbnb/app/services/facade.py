@@ -33,6 +33,13 @@ class HBnBFacade:
         return amenity
 
     def get_amenity(self, amenity_id):
+        if isinstance(amenity_id, list):
+            amenities = []
+            for a_id in amenity_id:
+                amenity = self.amenity_repo.get(a_id)
+                if amenity:
+                    amenities.append(amenity)
+            return amenities
         return self.amenity_repo.get(amenity_id)
 
     def get_all_amenities(self):
