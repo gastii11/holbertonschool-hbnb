@@ -5,11 +5,12 @@ from email_validator import validate_email, EmailNotValidError
 
 
 class User(BaseModel):
-    def __init__(self, first_name: str, last_name: str, email: str, is_admin: bool = False):
+    def __init__(self, first_name: str, last_name: str, email: str, password, is_admin: bool = False):
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+        self.password = password
         self.is_admin = is_admin
         self.places = []  # lista de lugares que posee
 
@@ -72,3 +73,10 @@ class User(BaseModel):
             self.reviews.append(review)
             review.user = self
 
+def hash_password(self, password):
+    """Hashes the password before storing it."""
+    self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+def verify_password(self, password):
+    """Verifies if the provided password matches the hashed password."""
+    return bcrypt.check_password_hash(self.password, password)
