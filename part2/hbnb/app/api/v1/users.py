@@ -71,7 +71,7 @@ class UserResource(Resource):
         updated_user = facade.get_user(user_id)
 
         if not updated_user:
-            return {'error': 'User not found'}
+            return {'error': 'User not found'}, 404
         return {
             'id': updated_user.id,
             'first_name': updated_user.first_name,

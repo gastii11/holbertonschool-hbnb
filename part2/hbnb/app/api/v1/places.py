@@ -110,8 +110,8 @@ class PlaceResource(Resource):
         updated_place = facade.get_place(place_id)
 
         if not updated_place:
-            return {'error': 'Place not found'}
-        return {'message': 'Place updated successfully'}
+            return {'error': 'Place not found'}, 404
+        return {'message': 'Place updated successfully'}, 200
 
 @api.route('/<place_id>/reviews')
 class PlaceReviewList(Resource):
