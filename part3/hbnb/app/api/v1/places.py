@@ -54,7 +54,6 @@ class PlaceList(Resource):
             'latitude': new_place.latitude,
             'longitude': new_place.longitude,
             'owner_id': new_place.owner_id,
-            'amenities': new_place.amenities
         }, 201
 
     @api.response(200, 'List of places retrieved successfully')
@@ -111,8 +110,8 @@ class PlaceResource(Resource):
         updated_place = facade.get_place(place_id)
 
         if not updated_place:
-            return {'error': 'Place not found'}
-        return {'message': 'Place updated successfully'}
+            return {'error': 'Place not found'}, 404
+        return {'message': 'Place updated successfully'}, 200
 
 @api.route('/<place_id>/reviews')
 class PlaceReviewList(Resource):

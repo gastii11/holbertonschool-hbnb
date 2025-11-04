@@ -48,7 +48,7 @@ class ReviewResource(Resource):
         """Get review details by ID"""
         review = facade.get_review(review_id)
         if not review:
-            return {'error': 'Review not found'}
+            return {'error': 'Review not found'}, 404
         return {
             'id': review.id,
             'text': review.text,
@@ -68,15 +68,14 @@ class ReviewResource(Resource):
         updated_review = facade.get_review(review_id)
 
         if not updated_review:
-            return {'error': 'Review not found'}
-        return {'message': 'Review updated successfully'}
+            return {'error': 'Review not found'}, 404
+        return {'message': 'Review updated successfully'}, 200
 
     @api.response(200, 'Review deleted successfully')
     @api.response(404, 'Review not found')
     def delete(self, review_id):
         """Delete a review"""
         success = facade.delete_review(review_id)
-        if success:
-            return {'message': 'Review deleted successfully'}, 200
-        else:
+        if not success:
             return {'error': 'Review not found'}, 404
+        return {'message': 'Review deleted successfully'}, 200
