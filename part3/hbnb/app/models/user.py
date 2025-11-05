@@ -2,7 +2,7 @@ from app.models.basemodel import BaseModel
 from app.models.place import Place
 from app.models.review import Review
 from email_validator import validate_email, EmailNotValidError
-
+from app.__init__ import bcrypt
 
 class User(BaseModel):
     def __init__(self, first_name: str, last_name: str, email: str, password, is_admin: bool = False):
@@ -10,7 +10,7 @@ class User(BaseModel):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.password = password
+        self.password = password #crear getter y setter
         self.is_admin = is_admin
         self.places = []  # lista de lugares que posee
 
@@ -73,10 +73,19 @@ class User(BaseModel):
             self.reviews.append(review)
             review.user = self
 
-def hash_password(self, password):
-    """Hashes the password before storing it."""
-    self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+    @property
+    def password(self):
+        raise AttributeError("Error")
+    
+    @password.setter
+    def password(self, password):
+        _password = self.hash_password(password)
 
-def verify_password(self, password):
-    """Verifies if the provided password matches the hashed password."""
-    return bcrypt.check_password_hash(self.password, password)
+    
+    def hash_password(self, password):
+        """Hashes the password before storing it."""
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    def verify_password(self, password):
+        """Verifies if the provided password matches the hashed password."""
+        return bcrypt.check_password_hash(self.password, password)
