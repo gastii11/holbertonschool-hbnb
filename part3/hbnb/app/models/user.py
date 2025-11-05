@@ -79,7 +79,7 @@ class User(BaseModel):
     
     @password.setter
     def password(self, password):
-        _password = self.hash_password(password)
+        self._password_hash = bcrypt.generate_password_hash(password).decode('utf-8')    
     
     def hash_password(self, password):
         """Hashes the password before storing it."""
