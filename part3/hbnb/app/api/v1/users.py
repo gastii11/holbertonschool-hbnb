@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api = Namespace('users', description='User operations')
 
@@ -25,21 +26,16 @@ class UserList(Resource):
         existing_user = facade.get_user_by_email(user_data['email'])
         if existing_user:
             return {'error': 'Email already registered'}, 400
+            
         
-        # if not user_data['password']:
-        #     return {"error": "paso algo en la password"}
-
-        # import app.models.user
-        # hashed_password = user.hash_password(user_data['password'])
-        # user_data['password'] = hashed_password
-
         new_user = facade.create_user(user_data)
         return {
             'id': new_user.id,
             'message': 'User Created'
         }, 201
-
+    
     @api.response(200, 'List of users retrieved successfully')
+    @jwt_required()
     def get(self):
         """Retrieve all users"""
         users = facade.get_all_users()
@@ -56,6 +52,7 @@ class UserList(Resource):
 class UserResource(Resource):
     @api.response(200, 'User details retrieved successfully')
     @api.response(404, 'User not found')
+    @jwt_required()
     def get(self, user_id):
         """Get user details by ID"""
         user = facade.get_user(user_id)
@@ -71,6 +68,7 @@ class UserResource(Resource):
     @api.expect(user_model, validate=True)
     @api.response(200, 'User successfully updated')
     @api.response(404, 'User not found')
+    @jwt_required()
     def put(self, user_id):
         user_data = api.payload
         facade.update_user(user_id, user_data)
