@@ -2,10 +2,30 @@ from app.models.basemodel import BaseModel
 from app.models.place import Place
 from app.models.review import Review
 from email_validator import validate_email, EmailNotValidError
-from app.__init__ import bcrypt
+from app.extensions import bcrypt, db
+import uuid
 
-class User(BaseModel):
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+
     def __init__(self, first_name: str, last_name: str, email: str, password, is_admin: bool = False):
+        if not first_name or len(first_name) > 50:
+            raise ValueError("First name is required and cannot exceed 50 characters")
+        if not last_name or len(last_name) > 50:
+            raise ValueError("Last name is required and cannot exceed 50 characters")
+        try:
+            from email_validator import validate_email, EmailNotValidError
+            email_validation = validate_email(email, check_deliverability=False)
+            email = email_validation.normalized
+        except EmailNotValidError:
+            raise ValueError("Invalid email format")
+
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
@@ -13,39 +33,6 @@ class User(BaseModel):
         self.password = password #crear getter y setter
         self.is_admin = is_admin
         self.places = []  # lista de lugares que posee
-
-
-    @property
-    def first_name(self):
-        return self._first_name
-
-    @first_name.setter
-    def first_name(self, value):
-        if not value or len(value) > 50:
-            raise ValueError("First name is required and cannot exceed 50 characters")
-        self._first_name = value
-
-    @property
-    def last_name(self):
-        return self._last_name
-
-    @last_name.setter
-    def last_name(self, value):
-        if not value or len(value) > 50:
-            raise ValueError("Last name is required and cannot exceed 50 characters")
-        self._last_name = value
-
-    @property
-    def email(self):
-        return self._email
-
-    @email.setter
-    def email(self, value):
-        try:
-            email_validation = validate_email(value, check_deliverability=False)
-            self._email = email_validation.normalized
-        except EmailNotValidError:
-            raise ValueError("Invalid email format")
 
     def add_place(self, place):
         """
@@ -79,7 +66,7 @@ class User(BaseModel):
     
     @password.setter
     def password(self, password):
-        self._password_hash = bcrypt.generate_password_hash(password).decode('utf-8')    
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')    
     
     def hash_password(self, password):
         """Hashes the password before storing it."""
