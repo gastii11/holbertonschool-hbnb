@@ -1,10 +1,18 @@
 from app.models.basemodel import BaseModel
+from app.extensions import db
+import uuid
 
+class Amenity(db.Model, BaseModel):
+    __tablename__ = 'amenities'
 
-class Amenity(BaseModel):
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    _name = db.Column("name", db.String(50), nullable=False, unique=True)
+
     def __init__(self, name):
+        if not name or len(name) > 50:
+            raise ValueError("Amenity name is required and must not exceed 50 characters")
         super().__init__()
-        self.name = name
+        self._name = name
         self.places = []  # lugares que usan este amenity
 
     @property
