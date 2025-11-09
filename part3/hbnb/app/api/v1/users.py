@@ -12,6 +12,13 @@ user_model = api.model('User', {
     'password': fields.String(required=True, description='User password')
 })
 
+user_update_model = api.model('UserUpdate', {
+    'first_name': fields.String(required=False),
+    'last_name': fields.String(required=False),
+    'email': fields.String(required=False),
+    'password': fields.String(required=False)
+})
+
 @api.route('/')
 class UserList(Resource):
     @api.expect(user_model, validate=True)
@@ -65,7 +72,7 @@ class UserResource(Resource):
             'email': user.email
         }, 200
 
-    @api.expect(user_model, validate=True)
+    @api.expect(user_update_model, validate=True)
     @api.response(200, 'User successfully updated')
     @api.response(404, 'User not found')
     @jwt_required()

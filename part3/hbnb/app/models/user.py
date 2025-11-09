@@ -13,6 +13,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
     def __init__(self, first_name: str, last_name: str, email: str, password, is_admin=False):
         if not first_name or len(first_name) > 50:
