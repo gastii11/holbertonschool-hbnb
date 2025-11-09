@@ -15,6 +15,12 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    reviews = db.relationship(
+        "Review",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
     def __init__(self, first_name: str, last_name: str, email: str, password, is_admin=False):
         if not first_name or len(first_name) > 50:
             raise ValueError("First name is required and cannot exceed 50 characters")

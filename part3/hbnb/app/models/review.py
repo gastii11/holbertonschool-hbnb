@@ -1,13 +1,25 @@
 from app.models.basemodel import BaseModel
+from app.extensions import db
+import uuid
 
+class Review(db.Model, BaseModel):
+    __tablename__ = 'reviews'
 
-class Review(BaseModel):
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    _text = db.Column("text", db.Text, nullable=False)
+    _rating = db.Column("rating", db.Integer, nullable=False)
+    place_id = db.Column(db.String(36), db.ForeignKey('places.id'), nullable=False)
+    user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
+
+    place = db.relationship("Place", back_populates="reviews")
+    user = db.relationship("User", back_populates="reviews")
+
     def __init__(self, text, rating, place_id, user_id):
         super().__init__()
-        self.user_id = user_id # asociación con User (asociasion)
-        self.place_id = place_id # asociación con Place (asociasion)
         self.text = text
         self.rating = rating
+        self.place_id = place_id
+        self.user_id = user_id
 
     @property
     def text(self):
@@ -28,29 +40,3 @@ class Review(BaseModel):
         if not (1 <= value <= 5):
             raise ValueError("Rating must be between 1 and 5.")
         self._rating = value
-
-    def set_user(self, user):
-        from app.models.user import User
-        """
-        Asigna un User como autor de la Review.
-        - Valida tipo.
-        - Evita duplicados en user.reviews.
-        """
-        if not isinstance(user, User):
-            raise TypeError("Debe ser una instancia de User")
-        self.user = user
-        if self not in user.reviews:
-            user.reviews.append(self)
-
-    def set_place(self, place):
-        from app.models.place import Place
-        """
-        Asigna un Place a la Review.
-        - Valida tipo.
-        - Evita duplicados en place.reviews.
-        """
-        if not isinstance(place, Place):
-            raise TypeError("Debe ser una instancia de Place")
-        self.place = place
-        if self not in place.reviews:
-            place.reviews.append(self)

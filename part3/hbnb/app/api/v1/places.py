@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from flask_jwt_extended import jwt_required
 
 api = Namespace('places', description='Place operations')
 
@@ -57,6 +58,7 @@ class PlaceList(Resource):
         }, 201
 
     @api.response(200, 'List of places retrieved successfully')
+    @jwt_required()
     def get(self):
         """Retrieve a list of all places"""
         places = facade.get_all_places()
@@ -77,6 +79,7 @@ class PlaceList(Resource):
 class PlaceResource(Resource):
     @api.response(200, 'Place details retrieved successfully')
     @api.response(404, 'Place not found')
+    @jwt_required()
     def get(self, place_id):
         """Get place details by ID"""
         place = facade.get_place(place_id)
@@ -103,6 +106,7 @@ class PlaceResource(Resource):
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, place_id):
         """Update a place's information"""
         place_data = api.payload
@@ -117,6 +121,7 @@ class PlaceResource(Resource):
 class PlaceReviewList(Resource):
     @api.response(200, 'List of reviews for the place retrieved successfully')
     @api.response(404, 'Place not found')
+    @jwt_required()
     def get(self, place_id):
         """Get all reviews for a specific place"""
         reviews = facade.get_reviews_by_place(place_id)

@@ -1,12 +1,20 @@
 from app.models.basemodel import BaseModel
 from app.extensions import db
 import uuid
+from app.models.place import place_amenity
+
 
 class Amenity(db.Model, BaseModel):
     __tablename__ = 'amenities'
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     _name = db.Column("name", db.String(50), nullable=False, unique=True)
+
+    places = db.relationship(
+        'Place',
+        secondary=place_amenity,
+        back_populates='amenities'
+    )
 
     def __init__(self, name):
         if not name or len(name) > 50:
