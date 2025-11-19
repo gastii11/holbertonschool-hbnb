@@ -1,0 +1,186 @@
+###########################
+# USERS TESTS
+###########################
+
+# Test 1: Crear un usuario válido
+curl -X POST http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json" \
+  -d '{"first_name": "Test", "last_name": "HBnB", "email": "Test.HBnB@example.com", "password": "Test123"}'
+# Output esperado:
+# {
+#     "id": "521f466a-5910-4e29-a088-83b3d521075b",
+#     "message": "User Created"
+# }, 201
+
+# Test 2: Crear usuario sin password
+curl -X POST http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json" \
+  -d '{"first_name": "Test", "last_name": "HBnB", "email": "Test.HBnB@example.com"}'
+# Output esperado:
+# {
+#     "errors": {
+#         "password": "'password' is a required property"
+#     },
+#     "message": "Input payload validation failed"
+# }, 400
+
+# Test 3: Crear usuario con email inválido
+curl -X POST http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json" \
+  -d '{"first_name": "Test", "last_name": "HBnB", "email": "Test.HBnBexample.com", "password": "Test123"}'
+# Output esperado:
+# ValueError: Invalid email format
+
+# Test 4: Crear usuario con email duplicado
+curl -X POST http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json" \
+  -d '{"first_name": "Test", "last_name": "HBnB", "email": "Test.HBnB@example.com", "password": "Test123"}'
+# Output esperado:
+# {
+#     "error": "Email already registered"
+# }, 400
+
+# Test 5: Login con credenciales correctas
+curl -X POST http://localhost:5000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"password": "Test123", "email": "Test.HBnB@example.com"}'
+# Output esperado:
+# {
+#     "access_token": "<JWT_TOKEN>"
+# }, 200
+
+# Test 6: Login con credenciales incorrectas
+curl -X POST http://localhost:5000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"password": "NoExiste123", "email": "NoExiste@example.com"}'
+# Output esperado:
+# {
+#     "error": "Invalid credentials"
+# }, 401
+
+# Test 7: Obtener usuario con token expirado
+curl -X GET http://localhost:5000/api/v1/users/521f466a-5910-4e29-a088-83b3d521075b \
+  -H "Authorization: Bearer <EXPIRED_JWT>"
+# Output esperado:
+# {
+#   "msg": "Token has expired"
+# }, 401
+
+# Test 8: Obtener lista de usuarios
+curl -X GET http://localhost:5000/api/v1/users/ \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+# Output esperado:
+# [
+#     {
+#         "id": "8345b8de-903d-4594-840f-ddd838d84336",
+#         "first_name": "Nacho",
+#         "last_name": "Cabrera",
+#         "email": "nacho@gmail.com"
+#     },
+#     {
+#         "id": "521f466a-5910-4e29-a088-83b3d521075b",
+#         "first_name": "Test",
+#         "last_name": "HBnB",
+#         "email": "Test.HBnB@example.com"
+#     }
+# ]
+
+# Test 9: Obtener un usuario válido
+curl -X GET http://localhost:5000/api/v1/users/521f466a-5910-4e29-a088-83b3d521075b \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+# Output esperado:
+# {
+#     "id": "521f466a-5910-4e29-a088-83b3d521075b",
+#     "first_name": "Test",
+#     "last_name": "HBnB",
+#     "email": "Test.HBnB@example.com"
+# }, 200
+
+# Test 10: Obtener usuario inexistente
+curl -X GET http://localhost:5000/api/v1/users/521f466a-5910-4e29-a088-83b3d5210777 \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+# Output esperado:
+# {
+#     "error": "User not found"
+# }, 404
+
+# Test 11: Actualizar un usuario válido
+curl -X PUT "http://localhost:5000/api/v1/users/521f466a-5910-4e29-a088-83b3d521075b" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -d '{
+        "first_name": "Test",
+        "last_name": "AirBnB",
+        "email": "Test.AirBnB@example.com",
+        "password": "Test123"
+      }'
+# Output esperado:
+# {
+#     "id": "521f466a-5910-4e29-a088-83b3d521075b",
+#     "first_name": "Test",
+#     "last_name": "AirBnB",
+#     "email": "Test.AirBnB@example.com"
+# }, 200
+
+# Test 12: Actualizar usuario con payload inválido
+curl -X PUT "http://localhost:5000/api/v1/users/521f466a-5910-4e29-a088-83b3d521075b" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -d '{
+        "last_name": "AirBnB",
+        "email": "Test.AirBnB@example.com",
+        "password": "Test123"
+      }'
+# Output esperado:
+# {
+#     "errors": {
+#         "first_name": "'first_name' is a required property"
+#     },
+#     "message": "Input payload validation failed"
+# }, 400
+
+###########################
+# AMENITIES TESTS
+###########################
+
+# Test 13: Crear un amenity válido
+curl -X POST http://localhost:5000/api/v1/amenities/ \
+  -H "Content-Type: application/json" \
+  -d '{"name": "WiFi 5G"}'
+# Output esperado:
+# {
+#     "id": "bba94d20-d21b-4f0d-b14a-e486def2665b",
+#     "name": "WiFi 5G"
+# }, 201
+
+# Test 14: Obtener lista de amenities
+curl -X GET http://localhost:5000/api/v1/amenities/ \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+# Output esperado:
+# [
+#     {
+#         "id": "c119d924-37fe-4600-aa5b-56d661271d8e",
+#         "name": "air conditioning"
+#     },
+#     {
+#         "id": "bba94d20-d21b-4f0d-b14a-e486def2665b",
+#         "name": "WiFi 5G"
+#     }
+# ], 200
+
+# Test 15: Obtener un amenity válido
+curl -X GET http://localhost:5000/api/v1/amenities/bba94d20-d21b-4f0d-b14a-e486def2665b \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+# Output esperado:
+# {
+#     "id": "bba94d20-d21b-4f0d-b14a-e486def2665b",
+#     "name": "WiFi 5G"
+# }, 200
+
+# Test 16: Obtener un amenity inexistente
+curl -X GET http://localhost:5000/api/v1/amenities/bba94d20-d21b-4f0d-b14a-e486def2675b \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+# Output esperado:
+# {
+#     "error": "Amenity not found"
+# }, 404
